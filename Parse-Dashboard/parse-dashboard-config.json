@@ -1,10 +1,10 @@
 {
-  "apps": [{
-    "serverURL": "",
-    "appId": "",
-    "masterKey": "",
-    "appName": "",
-    "iconName": ""
-  }],
-  "iconsFolder": "icons"
+  "apps": [
+    {
+      "serverURL": "http://localhost:1337/parse",
+      "appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR",
+      "masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
+      "appName": "ParentPlanet"
+    }
+  ]
 }
