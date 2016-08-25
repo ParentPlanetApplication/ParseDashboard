@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "serverURL": "https://mighty-hamlet-52509.herokuapp.com/parse",
+      "appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR",
+      "masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
+      "appName": "Parent Planet"
+    }
+  ],
+  "users": [
+    {
+      "user":"pp.parentplanet.com",
+      "pass":"1234qwer"
+    }
+  ]
+}
