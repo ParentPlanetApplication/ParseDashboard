@@ -30,7 +30,8 @@ program.parse( process.argv );
 const host = program.host || process.env.HOST || '0.0.0.0';
 const port = program.port || process.env.PORT || 4040;
 const mountPath = program.mountPath || process.env.MOUNT_PATH || '/';
-const allowInsecureHTTP = program.allowInsecureHTTP || process.env.PARSE_DASHBOARD_ALLOW_INSECURE_HTTP;
+let allowInsecureHTTP = program.allowInsecureHTTP || process.env.PARSE_DASHBOARD_ALLOW_INSECURE_HTTP;
+let configSSLCa = '';
 
 let explicitConfigFileProvided = !!program.config;
 let configFile = null;
@@ -92,6 +93,7 @@ if ( configFile ) {
 	console.log( 'You must provide either a config file or an app ID, Master Key, and server URL. See parse-dashboard --help for details.' );
 	process.exit( 4 );
 }
+console.log(configFile);
 p.then( config => {
 		config.data.apps.forEach( app => {
 			if ( !app.appName ) {
@@ -102,6 +104,22 @@ p.then( config => {
 		if ( config.data.iconsFolder && configFilePath ) {
 			config.data.iconsFolder = path.join( configFilePath, config.data.iconsFolder );
 		}
+
+    if( config.data.ssl.allowInsecureHTTP ) {
+      allowInsecureHTTP = config.data.ssl.allowInsecureHTTP;
+    }
+
+    if( config.data.ssl.sslKey ) {
+      configSSLKey = config.data.ssl.sslKey;
+    }
+
+    if( config.data.ssl.sslCert ) {
+      configSSLCert = config.data.ssl.sslCert;
+    }
+
+    if( config.data.ssl.sslCa ) {
+      configSSLCa = config.data.ssl.sslCa;
+    }
 
 		const app = express();
 
@@ -117,10 +135,12 @@ p.then( config => {
 			var fs = require( 'fs' );
 			var privateKey = fs.readFileSync( configSSLKey );
 			var certificate = fs.readFileSync( configSSLCert );
+			var ca = fs.readFileSync( configSSLCa );
 
 			const server = require( 'https' ).createServer( {
 				key: privateKey,
-				cert: certificate
+				cert: certificate,
+        ca: ca
 			}, app ).listen( port, host, function () {
 				console.log( `The dashboard is now available at https://${server.address().address}:${server.address().port}${mountPath}` );
 			} );

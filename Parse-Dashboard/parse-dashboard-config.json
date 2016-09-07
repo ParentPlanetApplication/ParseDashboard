@@ -1,10 +1,22 @@
 {
   "apps": [
     {
-      "serverURL": "http://localhost:1337/parse",
+      "serverURL": "https://server.parentplanet.com:1337/parse",
       "appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR",
       "masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
-      "appName": "ParentPlanet"
+      "appName": "Parent Planet"
+    }
+  ],
+  "ssl": {
+    "allowInsecureHTTP": "true",
+    "sslKey": "certs/server_parentplanet_com.pem",
+    "sslCert": "certs/server_parentplanet_com.crt",
+    "sslCa": "certs/server_parentplanet_com.ca-bundle"
+  },
+  "users": [
+    {
+      "user":"pp.parentplanet.com",
+      "pass":"1234qwer"
     }
   ]
 }
