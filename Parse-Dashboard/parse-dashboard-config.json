@@ -1,22 +1,53 @@
 {
-  "apps": [
+	"apps": [
+		{
+			"serverURL": "https://localhost:1337/parse",
+			"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR-LocalStaging",
+			"masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
+			"appName": "Parent Planet - Dev"
+    },
+		{
+			"serverURL": "https://localhost:13370/parse",
+			"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR-LocalProduction",
+			"masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
+			"appName": "Parent Planet - Prod"
+    },
     {
-      "serverURL": "https://server.parentplanet.com:1337/parse",
-      "appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR",
-      "masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
-      "appName": "Parent Planet"
+			"serverURL": "https://server.parentplanet.com:1337/parse",
+			"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR",
+			"masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
+			"appName": "Parent Planet - Dev"
+    },
+		{
+			"serverURL": "https://server.parentplanet.com:13370/parse",
+			"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR-AwsProduction",
+			"masterKey": "7Awx4E21biT2iEfViPATX1r44YlYNUOISyxQoIr9",
+			"appName": "Parent Planet - Prod"
     }
   ],
-  "ssl": {
-    "allowInsecureHTTP": "true",
-    "sslKey": "certs/server_parentplanet_com.pem",
-    "sslCert": "certs/server_parentplanet_com.crt",
-    "sslCa": "certs/server_parentplanet_com.ca-bundle"
-  },
-  "users": [
-    {
-      "user":"pp.parentplanet.com",
-      "pass":"1234qwer"
+	"ssl": {
+		"allowInsecureHTTP": "true",
+		"sslKey": "certs/server_parentplanet_com.pem",
+		"sslCert": "certs/server_parentplanet_com.crt",
+		"sslCa": "certs/server_parentplanet_com.ca-bundle"
+	},
+	"users": [
+		{
+			"user": "pp.parentplanet.com",
+			"pass": "1234qwer",
+			"apps": [ {
+				"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR"
+			}, {
+				"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR-AwsProduction"
+			} ]
+    }, {
+			"user": "pp.parentplanet.local",
+			"pass": "1234qwer",
+			"apps": [ {
+				"appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR-LocalStaging"
+			}, {
+        "appId": "C5E7FSUJXEJ7gTODpBLCuZShhJUxhu9AHjdlU4QR-LocalProduction"
+      }]
     }
   ]
 }
