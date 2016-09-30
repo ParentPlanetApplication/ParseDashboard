@@ -55,7 +55,6 @@ if ( configFile ) {
 	configFilePath = path.dirname( configFile );
 }
 
-console.log( configFile );
 p.then( config => {
   if ( config.data.iconsFolder && configFilePath ) {
     config.data.iconsFolder = path.join( configFilePath, config.data.iconsFolder );
@@ -79,7 +78,7 @@ p.then( config => {
 
 
 	config.data.apps.forEach( app => {
-    console.log(app.appName);
+    // console.log(app.appName);
 		// if ( !app.appName ) {
 		// 	app.appName = app.appId;
 		// }
