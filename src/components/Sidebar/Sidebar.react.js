@@ -13,7 +13,10 @@ import SidebarHeader  from 'components/Sidebar/SidebarHeader.react';
 import SidebarSection from 'components/Sidebar/SidebarSection.react';
 import SidebarSubItem from 'components/Sidebar/SidebarSubItem.react';
 import styles         from 'components/Sidebar/Sidebar.scss';
+import ParseApp           from 'lib/ParseApp';
 
+let host = window.location.host;
+//alert(host);
 const Sidebar = ({
   prefix,
   action,
@@ -56,14 +59,77 @@ const Sidebar = ({
   });
   var LoginRender = React.createClass({
     render: function() {
-    return (<a href='/'>Login<span className={styles.emoji}></span></a>);
+    return (<a onClick={Login}>Login<span className={styles.emoji}></span></a>);
     }
   });
-  function Logout(){
-    var p = window.location.protocol + '//'
+  function Login(){
+    //alert(host);
+     window.location.href = "https://" + host +"/apps";//localhost:4040/apps";
+  }
+ function Logout(){
+    /*var p = window.location.protocol + '//'
   // current location must return 200 OK for this GET
     window.location = window.location.href.replace(p, p + 'logout:password@');
-     window.location.href="/";
+     window.location.href="/";*/
+     var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+var isSafari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1;//Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+var isChrome = !navigator.userAgent.toLowerCase().indexOf('chrome/') > -1;              // Chrome 1+
+var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+var Host = window.location.host;
+
+//alert(isSafari);
+//Clear Basic Realm Authentication
+if(isIE){
+//IE
+    document.execCommand("ClearAuthenticationCache");
+    window.location = '/';
+}
+else if(isSafari && !isChrome)
+{//Safari. but this works mostly on all browser except chrome
+    (function(safeLocation){
+        var outcome, u, m = "You should be logged out now.";
+        // IE has a simple solution for it - API:
+        try { outcome = document.execCommand("ClearAuthenticationCache") }catch(e){}
+        // Other browsers need a larger solution - AJAX call with special user name - 'logout'.
+        if (!outcome) {
+            // Let's create an xmlhttp object
+            outcome = (function(x){
+                if (x) {
+                    // the reason we use "random" value for password is 
+                    // that browsers cache requests. changing
+                    // password effectively behaves like cache-busing.
+                    x.open("HEAD", safeLocation || location.href, true, "logout", (new Date()).getTime().toString())
+                    x.send("");
+                    // x.abort()
+                    return 1 // this is speculative "We are done." 
+                } else {
+                    return
+                }
+            })(window.XMLHttpRequest ? new window.XMLHttpRequest() : ( window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : u )) 
+        }
+        if (!outcome) {
+            m = "Your browser is too old or too weird to support log out functionality. Close all windows and restart the browser."
+        }
+        //alert(m);
+        window.location = '/apps';
+        // return !!outcome
+    })(/*if present URI does not return 200 OK for GET, set some other 200 OK location here*/)
+    //alert("a");
+   // var p = window.location.protocol + '//';
+//alert(host);
+    //window.location = window.location.href.replace(p, p + 'logout:password@');//'https://log:out@'+Host+'/';
+}
+else{
+//Firefox,Chrome
+var p = window.location.protocol + '//';
+//alert(host);
+    window.location = window.location.href.replace(p, p + 'logout:password@');//'https://log:out@'+Host+'/';
+   
+}
+  
   } 
   return <div className={styles.sidebar}>
     <SidebarHeader />
