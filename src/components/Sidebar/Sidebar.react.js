@@ -49,7 +49,22 @@ const Sidebar = ({
   }
 
   const apps = [].concat(AppsManager.apps()).sort((a, b) => (a.name < b.name ? -1 : (a.name > b.name ? 1 : 0)));
-
+   var LogoutRender = React.createClass({
+    render: function() {
+    return (<a onClick={Logout}>Logout<span className={styles.emoji}></span></a>);
+    }
+  });
+  var LoginRender = React.createClass({
+    render: function() {
+    return (<a href='/'>Login<span className={styles.emoji}></span></a>);
+    }
+  });
+  function Logout(){
+    var p = window.location.protocol + '//'
+  // current location must return 200 OK for this GET
+    window.location = window.location.href.replace(p, p + 'logout:password@');
+     window.location.href="/";
+  } 
   return <div className={styles.sidebar}>
     <SidebarHeader />
     {appSelector ? <AppsSelector apps={apps} /> : null}
@@ -76,11 +91,15 @@ const Sidebar = ({
         );
       })}
     </div>
+    
     <div className={styles.footer}>
-      <a target='_blank' href='https://parseplatform.github.io'>Open Source</a>
+      {
+              apps.length === 0? <LoginRender />:<LogoutRender/>
+            }
+    {/* <a target='_blank' href='https://parseplatform.github.io'>Open Source</a>
       <a target='_blank' href='https://www.parse.com/docs'>Docs</a>
       <a target='_blank' href='https://www.parse.com/downloads'>Downloads</a>
-      <FooterMenu />
+      <FooterMenu />*/}
     </div>
   </div>
 }
