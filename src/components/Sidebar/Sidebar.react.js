@@ -76,7 +76,7 @@ const Sidebar = ({
 var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
 var isSafari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1;//Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
     // At least Safari 3+: "[object HTMLElementConstructor]"
-var isChrome = !navigator.userAgent.toLowerCase().indexOf('chrome/') > -1;              // Chrome 1+
+var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome/') > -1;              // Chrome 1+
 var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
 var Host = window.location.host;
 
